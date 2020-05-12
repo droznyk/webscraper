@@ -1,5 +1,6 @@
 # WebScraper
 
+## App version: 0.0.1
 
 ## STACK
 |Tool|Version|
