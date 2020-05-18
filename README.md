@@ -1,6 +1,7 @@
 # WebScraper
+[![Build Status](https://travis-ci.com/droznyk/webscraper.svg?branch=master)](https://travis-ci.com/droznyk/webscraper)
 
-## App version: 0.0.1
+## App version: 0.0.2
 
 ## STACK
 |Tool|Version|
