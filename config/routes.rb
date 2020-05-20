@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :scrapers do
+    resources :rulesets, except: [:index] do
+      get 'scrape', to: 'rulesets#scrape', as: 'single_scrape'
+    end
+  end
+
+  resources :scrape_results, only: %i(show edit update destroy)
+
+  root 'scrapers#index'
 end

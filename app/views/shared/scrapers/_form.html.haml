@@ -1,0 +1,9 @@
+= form_with model: @scraper, class: "form", local: true do |f|
+  .form-group
+    %label= f.label :name, 'Scraper name:'
+    = f.text_field :name, class: "form-control"
+  .form-group
+    %label= f.label :description, "Scraper description:"
+    = f.text_area :description, class: "form-control", size: "60x12"
+  = f.submit class: "btn btn-success"
+  = link_to "Cancel", :back, class: "btn btn-danger"

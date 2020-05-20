@@ -1,0 +1,27 @@
+= form_with model: @ruleset, url: scraper_rulesets_path, class: "form mb-3", local: true do |f|
+  .form-group
+    %label= f.label :name, "Ruleset name:"
+    = f.text_field :name, class: "form-control"
+  .form-group
+    %label= f.label :description, "Ruleset description:"
+    = f.text_area :description, class: "form-control", size: "60x12"
+  .form-group
+    %label= f.label :url, "URL:"
+    = f.text_field :url, class: "form-control"
+  .form-group
+    = f.label :parent_rule_is_xpath, "Parent rule is XPath:"
+    = f.check_box :parent_rule_is_xpath
+  .form-group
+    %label= f.label :parent_rule, "Parent rule:"
+    = f.text_field :parent_rule, class: "form-control"
+  .form-group
+    = f.label :child_rule_is_xpath, "Child rule is XPath:"
+    = f.check_box :child_rule_is_xpath
+    %br
+    %small This field is optional.
+  .form-group
+    %label= f.label :child_rule, "Child rule:"
+    = f.text_field :child_rule, class: "form-control"
+    %small This field is optional.
+  = f.submit class: "btn btn-success"
+  = link_to "Cancel", :back, class: "btn btn-danger"

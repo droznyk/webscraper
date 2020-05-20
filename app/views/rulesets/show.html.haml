@@ -1,0 +1,59 @@
+.container
+  .row
+    %h1.w-100.text-center.mb-3= @ruleset.name
+  .row.mb-3.justify-content-center
+    .card.w-50
+      %h5.card-header Details
+      .card-body
+        %h5.card-title
+          Name:
+          = @ruleset.name
+        %p.card-text
+          %div
+            Description:
+            = @ruleset.description
+          %div
+            URL:
+            = link_to @ruleset.url, @ruleset.url, target: :blank
+          %div
+            Parent rule:
+            %code= @ruleset.parent_rule
+          %div
+            Parent rule is XPath?:
+            = image_tag(rule_xpath_icon(@ruleset.parent_rule_is_xpath?))
+          - if @ruleset.has_child_rule?
+            %div
+              Child rule:
+              %code= @ruleset.child_rule
+            %div
+              Parent rule is XPath?:
+              = image_tag(rule_xpath_icon(@ruleset.child_rule_is_xpath?))
+        .float-right
+          = link_to "Edit Ruleset", edit_scraper_ruleset_path(@scraper, @ruleset), class: "btn btn-warning"
+          = link_to "Delete Ruleset", scraper_ruleset_path(@scraper, @ruleset), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }
+          = link_to "Back to Scraper", scraper_path(@scraper), class: "btn btn-dark"
+          = link_to "Homepage", root_path, class: "btn btn-dark"
+  .row
+    .col-sm-12.pr-0.mb-1
+      .float-right
+        = link_to "Scrape now", scraper_ruleset_single_scrape_path(@scraper, @ruleset), class: "btn btn-primary"
+  .row
+    %h1.w-100.text-center.mb-1 Scrape results:
+    %table.table
+      %thead.thead-dark
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Value
+          %th{:scope => "col"} Created at
+          %th{:scope => "col"} Updated at
+          %th{:scope => "col"} Actions
+      %tbody
+        - @ruleset.scrape_results.map.with_index do |scrape_result, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= scrape_result.result_value
+            %td= scrape_result.created_at
+            %td= scrape_result.updated_at
+            %td
+              = link_to "Show Scrape Result", scrape_result_path(scrape_result), class: "btn btn-info"
+              = link_to "Delete Scrape Result", scrape_result_path(scrape_result), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }
