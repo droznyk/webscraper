@@ -1,0 +1,26 @@
+.container
+  .row
+    %h1.w-100.text-center.mb-3= @scrape_result.name
+  .row.mb-3.justify-content-center
+    .card
+      %h5.card-header Details
+      .card-body
+        %h5.card-title
+          Name:
+          = @scrape_result.name
+        %p.card-text
+          %div
+            Description:
+            = @scrape_result.description
+          %div
+            Result value:
+            %code= @scrape_result.result_value
+          - if @scrape_result.manual_change?
+            %div.bold
+              Result was changed manually at:
+              = @scrape_result.updated_at
+        .float-right
+          = link_to "Edit Scrape Result", edit_scrape_result_path(@scrape_result), class: "btn btn-warning"
+          = link_to "Delete Scrape Result", scrape_result_path(@scrape_result), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }
+          = link_to "Back to Ruleset", scraper_ruleset_path(@scrape_result.ruleset.scraper, @scrape_result.ruleset), class: "btn btn-dark"
+          = link_to "Homepage", root_path, class: "btn btn-dark"

@@ -1,0 +1,25 @@
+.container
+  .row
+    %h1.w-100.text-center.mb-3 Your Scrapers
+  .row
+    .col-sm-12.pr-0.mb-1
+      .float-right
+        = link_to "New Scraper", new_scraper_path, class: "btn btn-primary"
+  .row
+    %table.table
+      %thead.thead-dark
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Name
+          %th{:scope => "col"} Description
+          %th{:scope => "col"} Actions
+      %tbody
+        - @scrapers.map.with_index do |scraper, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= scraper.name
+            %td= scraper.description
+            %td
+              = link_to "Show Scraper", scraper_path(scraper), class: "btn btn-info"
+              = link_to "Edit Scraper", edit_scraper_path(scraper), class: "btn btn-warning"
+              = link_to "Delete Scraper", scraper_path(scraper), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }

@@ -1,0 +1,11 @@
+.container
+  .row
+    %h1.w-100.text-center.mb-3 Edit Scrape Result
+  .row
+    = form_with model: @scrape_result, class: "form", local: true do |f|
+      .form-group
+        %label= f.label :result_value, "Result value:"
+        = f.text_field :result_value, class: "form-control"
+      = f.submit class: "btn btn-success"
+      = link_to "Cancel", :back, class: "btn btn-danger"
+

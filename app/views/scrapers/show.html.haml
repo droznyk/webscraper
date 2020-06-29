@@ -1,0 +1,44 @@
+.container
+  .row
+    %h1.w-100.text-center.mb-3= @scraper.name
+  .row.mb-3.justify-content-center
+    .card.w-50
+      %h5.card-header Details
+      .card-body
+        %h5.card-title
+          Name:
+          = @scraper.name
+        %p.card-text
+          Description:
+          = @scraper.description
+        .float-right
+          = link_to "Edit Scraper", edit_scraper_path(@scraper), class: "btn btn-warning"
+          = link_to "Delete Scraper", scraper_path(@scraper), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }
+          = link_to "Homepage", root_path, class: "btn btn-dark"
+  .row
+    .col-sm-12.pr-0.mb-1
+      .float-right
+        = link_to "New Ruleset", new_scraper_ruleset_path(@scraper), class: "btn btn-primary"
+  .row
+    %h1.w-100.text-center.mb-1 Scraper rulesets:
+    %table.table
+      %thead.thead-dark
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Name
+          %th{:scope => "col"} Description
+          %th{:scope => "col"} Last scraped value
+          %th{:scope => "col"} Last scraped at
+          %th{:scope => "col"} Actions
+      %tbody
+        - @scraper.rulesets.map.with_index do |ruleset, index|
+          %tr
+            %th{:scope => "row"}= index + 1
+            %td= ruleset.name
+            %td= ruleset.description
+            %td= last_scraped_value(ruleset)
+            %td= last_scraped_at(ruleset)
+            %td
+              = link_to "Show Ruleset", scraper_ruleset_path(@scraper, ruleset), class: "btn btn-info"
+              = link_to "Edit Ruleset", edit_scraper_ruleset_path(@scraper, ruleset), class: "btn btn-warning"
+              = link_to "Delete Ruleset", scraper_ruleset_path(@scraper, ruleset), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }
